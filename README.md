@@ -1,6 +1,6 @@
 # Buckle
 
-Subsea pipeline buckling.
+Subsea pipeline buckling analysis.
 
 ![pipe](http://www.scielo.br/img/revistas/jbsmse/v25n2/a08fig09.gif)
 
@@ -19,6 +19,5 @@ Based on the internal pressure profile (csv file input), calcuates:
 ## TODO
 
 * Expansion calculation
-* Click CLI
 * Save figures
 
