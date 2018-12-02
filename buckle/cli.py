@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """Console script for buckle."""
+
 import sys
 import click
 import toml
@@ -79,6 +80,12 @@ def main(args=None):
     F_b = results["F_b"].min()
     click.echo("Minimum buckle initiation force [N]:")
     click.secho(f"{F_b}", fg="green")
+
+    click.echo("Susceptible to lateral buckling:")
+    if F_res_max < F_b:
+        click.secho("Yes", fg="red")
+    else:
+        click.secho("No", fg="green")
 
     results.to_csv(RESULTS_FILE, index=False)
 

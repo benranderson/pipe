@@ -1,34 +1,34 @@
 # pipeline
-D_p = 0.66
-t_p = 0.0206
-E_p = 207e9
-rho_p = 7850
-alpha = 1.18e-5
+D_p = 0.66 # m
+t_p = 0.0206 # m
+E_p = 207e9 # Pa
+rho_p = 7850 # kg/m^3
+alpha = 1.18e-5 # 1/degC
 v = 0.3
 
 # coating
-rho_c = 900
-t_c = 0.0035
-rho_conc = 3050
-t_conc = 0.06
-E_conc = 6.472e9
+rho_c = 900 # kg/m^3
+t_c = 0.0035 # m
+rho_conc = 3050 # kg/m^3
+t_conc = 0.06 # m
+E_conc = 6.472e9 # Pa
 Coff = 0
 
 # environment
-h = 109
-rho_w = 1025
-T_a = 4
-t_m = 0
-rho_m = 1025
+h = 109 # m
+rho_w = 1025 # kg/m^3
+T_a = 4 # degC
+t_m = 0 # m
+rho_m = 1025 # kg/m^3
 
 # operating
-rho_con = 184
-P_i = 19.2e6
-N_lay = 0
+rho_con = 184 # kg/m^3
+P_i = 19.2e6 # Pa
+N_lay = 0 # N
 
 # soil
 mu_a = 0.76
 mu_l = 0.6
 
 # refinement
-step = 10
+step = 100

@@ -2,7 +2,6 @@
 
 """Main module."""
 
-
 import pandas as pd
 import numpy as np
 from scipy import constants, interpolate, optimize
@@ -61,7 +60,7 @@ def run_analysis(i, temp_profile):
 
     L = temp_profile["KP"].max()
     f = interpolate.interp1d(temp_profile["KP"], temp_profile["T"])
-    results = pd.DataFrame(np.linspace(0, L, int(L / i.step)), columns=["x"])
+    results = pd.DataFrame(np.linspace(0, L, int(L / i.step) + 1), columns=["x"])
     results["T"] = f(results["x"])
 
     results["delta_T"] = results["T"] - i.T_a
