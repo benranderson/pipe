@@ -1,0 +1,34 @@
+# pipeline
+D_p = 0.66
+t_p = 0.0206
+E_p = 207e9
+rho_p = 7850
+alpha = 1.18e-5
+v = 0.3
+
+# coating
+rho_c = 900
+t_c = 0.0035
+rho_conc = 3050
+t_conc = 0.06
+E_conc = 6.472e9
+Coff = 0
+
+# environment
+h = 109
+rho_w = 1025
+T_a = 4
+t_m = 0
+rho_m = 1025
+
+# operating
+rho_con = 184
+P_i = 19.2e6
+N_lay = 0
+
+# soil
+mu_a = 0.76
+mu_l = 0.6
+
+# refinement
+step = 10
