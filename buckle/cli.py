@@ -81,11 +81,15 @@ def main(args=None):
     click.echo("Minimum buckle initiation force [N]:")
     click.secho(f"{F_b}", fg="green")
 
-    click.echo("Susceptible to lateral buckling:")
+    click.echo("Susceptible to lateral buckling?:")
     if F_res_max < F_b:
         click.secho("Yes", fg="red")
     else:
         click.secho("No", fg="green")
+
+    # create reports folder if it doesn't exist
+    if not os.path.exists("reports"):
+        os.makedirs("reports")
 
     results.to_csv(RESULTS_FILE, index=False)
 

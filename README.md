@@ -14,9 +14,3 @@ Based on the internal pressure profile (csv file input), calcuate and plot:
 * Minimum Hobbs buckle force
 * Actual force profile
 
-## TODO
-
-* Expansion calculation
-* Save figures
-* Buckle length solve helper
-

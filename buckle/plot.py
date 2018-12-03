@@ -11,7 +11,7 @@ def generate_fig(results, title, series, x_axis_label, y_axis_label):
 
     fig = figure(
         title=title,
-        plot_height=300,
+        plot_height=350,
         plot_width=700,
         x_range=(results["x"].min(), results["x"].max()),
         x_axis_label=x_axis_label,
