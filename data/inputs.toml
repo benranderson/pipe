@@ -1,34 +1,37 @@
 # pipeline
-D_p = 0.66 # m
-t_p = 0.0206 # m
+D_p = 0.61 # m
+t_p = 0.0205 # m
 E_p = 207e9 # Pa
 rho_p = 7850 # kg/m^3
-alpha = 1.18e-5 # 1/degC
+alpha = 1.17e-5 # 1/degC
 v = 0.3
 
 # coating
-rho_c = 900 # kg/m^3
-t_c = 0.0035 # m
-rho_conc = 3050 # kg/m^3
-t_conc = 0.06 # m
+rho_c = 1300 # kg/m^3
+t_c = 0.006 # m
+rho_conc = 2440 # kg/m^3
+t_conc = 0.04 # m
 E_conc = 6.472e9 # Pa
 Coff = 0
 
 # environment
-h = 109 # m
+h = 118 # m
 rho_w = 1025 # kg/m^3
 T_a = 4 # degC
 t_m = 0 # m
 rho_m = 1025 # kg/m^3
 
 # operating
-rho_con = 184 # kg/m^3
-P_i = 19.2e6 # Pa
+rho_con = 790 # kg/m^3
+P_i = 90e5 # Pa
 N_lay = 0 # N
 
 # soil
-mu_a = 0.76
+mu_a = 0.3
 mu_l = 0.6
 
 # refinement
 step = 100
+
+# wall theory selection
+thick = true

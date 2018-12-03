@@ -47,6 +47,7 @@ def parse_input_file():
         "mu_a",
         "mu_l",
         "step",
+        "thick",
     ]
 
     input_dict = toml.load(INPUTS_FILE)

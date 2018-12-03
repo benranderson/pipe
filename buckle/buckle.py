@@ -2,6 +2,8 @@
 
 """Main module."""
 
+from collections import OrderedDict
+
 import pandas as pd
 import numpy as np
 from scipy import constants, interpolate, optimize
@@ -64,11 +66,23 @@ def run_analysis(i, temp_profile):
     results["T"] = f(results["x"])
 
     results["delta_T"] = results["T"] - i.T_a
-    results["F_t"] = -i.E_p * A_p * i.alpha * results["delta_T"]
 
-    F_p = A_p * i.v * ((i.P_i * D_i - P_o * i.D_p) / (2 * i.t_p) - 0.5 * (i.P_i + P_o))
-    F_e = -np.pi / 4 * (i.P_i * D_i ** 2 - P_o * i.D_p ** 2)
-    results["F_eff"] = results["F_t"] + F_p + F_e + i.N_lay
+    def calc_effective_axial_force(df):
+        if i.thick:
+            return (
+                i.N_lay
+                - i.P_i * A_i
+                + 2 * i.P_i * i.v * (A_p / 4) * (D_i / i.t_p - 1)
+                - i.alpha * df["delta_T"] * i.E_p * A_p
+            )
+        else:
+            return (
+                i.N_lay
+                - i.P_i * A_i * (1 - 2 * i.v)
+                - A_p * i.E_p * i.alpha * df["delta_T"]
+            )
+
+    results["F_eff"] = results.apply(calc_effective_axial_force, axis=1)
 
     F_f_max = -i.mu_a * W_s * L / 2
 
@@ -118,4 +132,3 @@ def run_analysis(i, temp_profile):
     results["F_actual"] = results[["F_res", "F_b"]].max(axis=1)
 
     return results
-
