@@ -11,6 +11,7 @@ from types import SimpleNamespace
 import pandas as pd
 from bokeh.io import output_file
 from bokeh.plotting import show
+from tabulate import tabulate
 
 from buckle.buckle import run_analysis
 from buckle.plot import generate_plots
@@ -70,17 +71,16 @@ def main(args=None):
 
     click.secho("Running analysis...", fg="yellow")
     results = run_analysis(i, temp_profile)
-    F_eff_max = results["F_eff"].min()
-    click.echo("Maximum fully restrained effective axial force [N]:")
-    click.secho(f"{F_eff_max}", fg="green")
 
     F_res_max = results["F_res"].min()
-    click.echo("Maximum resultant effective axial force [N]:")
-    click.secho(f"{F_res_max}", fg="green")
-
     F_b = results["F_b"].min()
-    click.echo("Minimum buckle initiation force [N]:")
-    click.secho(f"{F_b}", fg="green")
+
+    headers = ["Parameter", "Units", "Value"]
+    table = [
+        ["Max. resultant effective axial force", "N", F_res_max],
+        ["Min. buckle initiation forcee", "N", F_b],
+    ]
+    click.secho(tabulate(table, headers=headers, tablefmt="psql"), fg="green")
 
     click.echo("Susceptible to lateral buckling?:")
     if F_res_max < F_b:
