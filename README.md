@@ -14,3 +14,10 @@ Based on the internal pressure profile (csv file input), calcuate and plot:
 * Minimum Hobbs buckle force
 * Actual force profile
 
+## Usage
+
+Bukle can be used via a comman line interface, `pipe`.
+
+```console
+$ pipe --help
+```

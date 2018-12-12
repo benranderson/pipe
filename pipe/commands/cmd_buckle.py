@@ -1,11 +1,6 @@
-# -*- coding: utf-8 -*-
-
-"""Console script for buckle."""
-
-import sys
+import os
 import click
 import toml
-import os
 from types import SimpleNamespace
 
 import pandas as pd
@@ -13,13 +8,10 @@ from bokeh.io import output_file
 from bokeh.plotting import show
 from tabulate import tabulate
 
-from buckle.buckle import run_analysis
-from buckle.plot import generate_plots
-
-TEMP_PROF_FILE = os.path.join("data", "temp_profile.csv")
-INPUTS_FILE = os.path.join("data", "inputs.toml")
-RESULTS_FILE = os.path.join("reports", "results.csv")
-PLOTS_FILE = os.path.join("reports", "plots.html")
+from pipe import logger
+from pipe.config import DEFAULT_INPUTDATA_FOLDER, DEFAULT_REPORTS_FOLDER
+from pipe.calculate.calc_buckle import run_analysis
+from pipe.plot import generate_plots
 
 
 def parse_input_file():
@@ -51,7 +43,9 @@ def parse_input_file():
         "thick",
     ]
 
-    input_dict = toml.load(INPUTS_FILE)
+    INPUT_DATA_FILE = os.path.join(DEFAULT_INPUTDATA_FOLDER, "inputs.toml")
+
+    input_dict = toml.load(INPUT_DATA_FILE)
 
     missing_params = set(PARAMS) - set(input_dict.keys())
     if len(missing_params) > 0:
@@ -61,15 +55,13 @@ def parse_input_file():
     return SimpleNamespace(**input_dict)
 
 
-@click.command()
-def main(args=None):
-    """Console script for buckle."""
+def buckle(plot):
 
-    click.secho("Parsing inputs...", fg="yellow")
     i = parse_input_file()
+    TEMP_PROF_FILE = os.path.join(DEFAULT_INPUTDATA_FOLDER, "temp_profile.csv")
     temp_profile = pd.read_csv(TEMP_PROF_FILE)
 
-    click.secho("Running analysis...", fg="yellow")
+    logger.info("Running analysis...")
     results = run_analysis(i, temp_profile)
 
     F_res_max = results["F_res"].min()
@@ -80,27 +72,25 @@ def main(args=None):
         ["Max. resultant effective axial force", "N", F_res_max],
         ["Min. buckle initiation forcee", "N", F_b],
     ]
-    click.secho(tabulate(table, headers=headers, tablefmt="psql"), fg="green")
+    logger.info(tabulate(table, headers=headers, tablefmt="psql"))
 
-    click.echo("Susceptible to lateral buckling?:")
+    logger.info("Susceptible to lateral buckling?:")
     if F_res_max < F_b:
-        click.secho("Yes", fg="red")
+        logger.warning("Yes")
     else:
-        click.secho("No", fg="green")
+        logger.info("No")
 
     # create reports folder if it doesn't exist
     if not os.path.exists("reports"):
         os.makedirs("reports")
 
+    RESULTS_FILE = os.path.join(DEFAULT_REPORTS_FOLDER, "results.csv")
     results.to_csv(RESULTS_FILE, index=False)
 
-    click.secho("Generating plots...", fg="yellow")
-    plots = generate_plots(results)
-    output_file(PLOTS_FILE, title="Buckle Plots")
-    show(plots)
+    if plot:
+        logger.info("Plotting...")
+        plots = generate_plots(results)
+        PLOTS_FILE = os.path.join(DEFAULT_REPORTS_FOLDER, "plots.html")
+        output_file(PLOTS_FILE, title="Buckle Plots")
+        show(plots)
 
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())  # pragma: no cover

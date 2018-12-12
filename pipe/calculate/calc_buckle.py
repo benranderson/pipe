@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Main module."""
+"""Lateral buckling module."""
 
 from collections import OrderedDict
 

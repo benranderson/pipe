@@ -31,7 +31,7 @@ setup(
         "Programming Language :: Python :: 3.7",
     ],
     description="Subsea pipeline buckle design",
-    entry_points={"console_scripts": ["buckle=buckle.cli:main"]},
+    entry_points={"console_scripts": ["pipe=pipe.__main__:cli"]},
     install_requires=requirements,
     license="MIT license",
     long_description=readme,
