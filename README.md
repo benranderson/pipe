@@ -1,6 +1,6 @@
-# Buckle
+# Pipe
 
-Subsea pipeline buckling analysis.
+Subsea pipeline design.
 
 ![pipe](http://www.scielo.br/img/revistas/jbsmse/v25n2/a08fig09.gif)
 
@@ -16,8 +16,12 @@ Based on the internal pressure profile (csv file input), calcuate and plot:
 
 ## Usage
 
-Bukle can be used via a comman line interface, `pipe`.
+Pipe can be used via a command line interface, `pipe`.
 
 ```console
 $ pipe --help
+```
+
+```console
+$ pipe buckle -p
 ```
