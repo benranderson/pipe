@@ -8,6 +8,8 @@ import pandas as pd
 import numpy as np
 from scipy import constants, interpolate, optimize
 
+from pipe import logger
+
 
 def calc_d(D_o, t, inner=False):
     """Return the outer or inner diameter [m].
@@ -162,5 +164,11 @@ def run_analysis(i, temp, depth):
 
     results["F_b"] = calc_buckle_forces(EI, W_s, A_p, i.E_p, i.mu_l, i.mu_a).max()
     results["F_actual"] = results[["F_res", "F_b"]].max(axis=1)
+
+    # --------- Log intermediate results for debugging -----------
+
+    logger.debug(f"Submerged Weight [N]: {W_s}")
+    logger.debug(f"Bending Stiffness [N/m]: {EI}")
+    logger.debug(f"Local Internal Pressure [Pa]: {P_i}")
 
     return results

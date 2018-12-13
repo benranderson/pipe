@@ -61,12 +61,12 @@ def buckle(plot):
     logger.info("Parsing input data...")
     i = parse_input_file()
     TEMP_FILE = os.path.join(DEFAULT_INPUTDATA_FOLDER, "temp.csv")
-    temp = pd.read_csv(TEMP_FILE)
+    temp_df = pd.read_csv(TEMP_FILE)
     DEPTH_FILE = os.path.join(DEFAULT_INPUTDATA_FOLDER, "depth.csv")
-    depth = pd.read_csv(DEPTH_FILE)
+    depth_df = pd.read_csv(DEPTH_FILE)
 
     logger.info("Running analysis...")
-    results = run_analysis(i, temp, depth)
+    results = run_analysis(i, temp_df, depth_df)
 
     F_res_max = results["F_res"].min()
     F_b = results["F_b"].min()
