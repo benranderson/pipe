@@ -10,7 +10,7 @@ from tabulate import tabulate
 
 from pipe import logger
 from pipe.config import DEFAULT_INPUTDATA_FOLDER, DEFAULT_REPORTS_FOLDER
-from pipe.calculate.calc_buckle import run_analysis
+from pipe.calculate.buckle import run_analysis
 from pipe.plot import generate_plots
 
 
@@ -29,13 +29,14 @@ def parse_input_file():
         "t_conc",
         "E_conc",
         "Coff",
-        "h",
         "rho_w",
         "T_a",
         "t_m",
         "rho_m",
+        "h",
         "rho_con",
-        "P_i",
+        "P_d",
+        "h_ref",
         "N_lay",
         "mu_a",
         "mu_l",
@@ -57,12 +58,15 @@ def parse_input_file():
 
 def buckle(plot):
 
+    logger.info("Parsing input data...")
     i = parse_input_file()
-    TEMP_PROF_FILE = os.path.join(DEFAULT_INPUTDATA_FOLDER, "temp_profile.csv")
-    temp_profile = pd.read_csv(TEMP_PROF_FILE)
+    TEMP_FILE = os.path.join(DEFAULT_INPUTDATA_FOLDER, "temp.csv")
+    temp = pd.read_csv(TEMP_FILE)
+    DEPTH_FILE = os.path.join(DEFAULT_INPUTDATA_FOLDER, "depth.csv")
+    depth = pd.read_csv(DEPTH_FILE)
 
     logger.info("Running analysis...")
-    results = run_analysis(i, temp_profile)
+    results = run_analysis(i, temp, depth)
 
     F_res_max = results["F_res"].min()
     F_b = results["F_b"].min()

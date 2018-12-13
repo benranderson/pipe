@@ -15,15 +15,16 @@ E_conc = 6.472e9 # Pa
 Coff = 0
 
 # environment
-h = 118 # m
 rho_w = 1025 # kg/m^3
 T_a = 4 # degC
 t_m = 0 # m
 rho_m = 1025 # kg/m^3
+h = 100 # m
 
 # operating
 rho_con = 790 # kg/m^3
-P_i = 90e5 # Pa
+P_d = 90e5 # Pa
+h_ref = 0 # m
 N_lay = 0 # N
 
 # soil
