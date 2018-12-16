@@ -19,3 +19,4 @@ numpy==1.15.4
 tabulate==0.8.2
 colorlog==3.1.4
 jupyter==1.0.0
+toml==0.10.0
